@@ -1,26 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC, ReactElement } from "react";
+import { Box, Text } from "@mantine/core";
 
-function App() {
+const App: FC = (): ReactElement => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box
+      p="md"
+      sx={(theme) => ({ background: theme.colors.dark[3], height: "100%" })}
+    >
+      <Text color="yellow">MLR</Text>
+    </Box>
   );
-}
+};
 
 export default App;
