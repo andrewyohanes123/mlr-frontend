@@ -4,15 +4,31 @@ import "./index.css";
 import App from "./App";
 import { MantineProvider } from "@mantine/core";
 import reportWebVitals from "./reportWebVitals";
+import { HashRouter as Router } from "react-router-dom";
+import { NotificationsProvider } from "@mantine/notifications";
+import { GlobalModelsProvider } from "contexts/ModelsContext";
+import { UserProvider } from "contexts/UserContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-      <App />
-    </MantineProvider>
+    <GlobalModelsProvider>
+      <UserProvider>
+        <Router>
+          <MantineProvider
+            theme={{ fontFamily: "Montserrat" }}
+            withGlobalStyles
+            withNormalizeCSS
+          >
+            <NotificationsProvider position="top-right" >
+              <App />
+            </NotificationsProvider>
+          </MantineProvider>
+        </Router>
+      </UserProvider>
+    </GlobalModelsProvider>
   </React.StrictMode>
 );
 
