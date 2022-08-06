@@ -35,7 +35,7 @@ const NavbarLink: FC<MainLinkProps> = ({
         background:
           pathname === route
             ? theme.colorScheme !== "dark"
-              ? theme.colors.gray[2]
+              ? theme.colors.gray[1]
               : theme.colors.dark[6]
             : "transparent",
         color:
@@ -46,7 +46,7 @@ const NavbarLink: FC<MainLinkProps> = ({
           backgroundColor:
             theme.colorScheme === "dark"
               ? theme.colors.dark[6]
-              : theme.colors.gray[1],
+              : theme.colors.gray[2],
         },
       })}
     >

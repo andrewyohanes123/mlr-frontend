@@ -1,13 +1,5 @@
 import { FC, ReactElement, useCallback, useState } from "react";
-import {
-  Box,
-  Button,
-  Grid,
-  Group,
-  Text,
-  Title,
-  useMantineTheme,
-} from "@mantine/core";
+import { Button, Grid, Group, Text, useMantineTheme } from "@mantine/core";
 import { Dropzone } from "@mantine/dropzone";
 import { IconUpload, IconX, IconFileText } from "@tabler/icons";
 import Papa from "papaparse";
@@ -16,6 +8,7 @@ import { FileText } from "tabler-icons-react";
 import { showNotification } from "@mantine/notifications";
 import { useErrorCatcher } from "hooks/useErrorCatcher";
 import useModels from "hooks/useModels";
+import RouteContainer from "components/RouteContainer";
 
 const MAX_FILE_SIZE = 3 * 1024 ** 2;
 const ICON_SIZE = 70;
@@ -48,6 +41,7 @@ const Layout: FC = (): ReactElement => {
       header: true,
       skipEmptyLines: true,
       complete(results, file) {
+        // console.log(results);
         setData(results.data as TCSVData[]);
       },
       transformHeader(header, index) {
@@ -73,8 +67,16 @@ const Layout: FC = (): ReactElement => {
       transform: (value, field) => {
         if (field === "age") {
           return parseInt(value.replace(/tahun/g, "").trim(), 10);
+        } else if (field === "x1") {
+          return parseFloat(value.replace(/,/g, "."));
+        } else if (field === "x2") {
+          return parseFloat(value.replace(/,/g, "."));
+        } else if (field === "x3") {
+          return parseFloat(value.replace(/,/g, "."));
+        } else if (field === "x4") {
+          return parseFloat(value.replace(/,/g, "."));
         }
-        return value
+        return value;
       },
     });
   }, []);
@@ -104,15 +106,14 @@ const Layout: FC = (): ReactElement => {
   }, [Variable, data, errorCatcher]);
 
   return (
-    <Box>
-      <Group my="md" align="center" spacing="md">
-        <FileText />
-        <Title order={4}>Masukkan File CSV</Title>
-      </Group>
+    <RouteContainer
+      title="Masukkan File CSV"
+      icon={<FileText strokeWidth={1} />}
+    >
       <Grid sx={{ height: "100%" }} align="center" gutter="md">
         <Grid.Col span={6}>
           <Dropzone
-          loading={loading}
+            loading={loading}
             onDrop={onDrop}
             onReject={onReject}
             maxSize={MAX_FILE_SIZE}
@@ -167,7 +168,7 @@ const Layout: FC = (): ReactElement => {
           )}
         </Grid.Col>
       </Grid>
-    </Box>
+    </RouteContainer>
   );
 };
 

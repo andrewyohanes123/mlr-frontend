@@ -14,7 +14,7 @@ const NotFoundPage: FC = (): ReactElement => {
         flexDirection: "column",
       })}
     >
-      <Error404 size={60} color={colors.dark[7]} strokeWidth={1} />
+      <Error404 size={150} color={colors.blue[7]} strokeWidth={1} />
       <Title order={1}>Oooppsss....</Title>
       <Text>Halaman tidak ditemukan</Text>
       <Button leftIcon={<Dashboard />} variant="light">
