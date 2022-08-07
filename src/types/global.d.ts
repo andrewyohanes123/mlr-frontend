@@ -21,6 +21,23 @@ export interface UserAttributes extends ModelInstance {
   recipient_users?: RecipientUserAttributes[];
 }
 
+export type TFirstStep = {
+	x1y: number;
+	x2y: number;
+	x3y: number;
+	x4y: number;
+	x1x2: number;
+	x1x3: number;
+	x1x4: number;
+	x2x3: number;
+	x2x4: number;
+	x3x4: number;
+	x12: number;
+	x22: number;
+	x32: number;
+	x42: number;
+};
+
 export interface VariableAttributes extends ModelInstance {
 	id: number;
 	gender: string;
@@ -30,6 +47,7 @@ export interface VariableAttributes extends ModelInstance {
 	x2: number;
 	x3: number;
 	x4: number;
+  first_step: TFirstStep;
 	created_at?: Date;
 	updated_at?: Date;
 }
