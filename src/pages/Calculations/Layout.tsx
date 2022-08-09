@@ -1,8 +1,11 @@
 import { Text, Title, Box } from "@mantine/core";
+import LoadingComponent from "components/LoadingComponent";
 import RouteContainer from "components/RouteContainer";
-import QuestionersData from "pages/Questioners/QuestionersData";
-import { FC, ReactElement } from "react";
+import { FC, ReactElement, lazy } from "react";
 import { SquareRoot2 } from "tabler-icons-react";
+
+const QuestionersData = lazy(() => import("pages/Questioners/QuestionersData"));
+const MatrixCalculations = lazy(() => import("./MatrixCalculations"));
 
 interface IStepProps {
   title?: string;
@@ -26,10 +29,19 @@ const Layout: FC = (): ReactElement => {
         title="Langkah 1"
         description="Dengan menggunakan metode matrix membuat tabel perhitungan setiap variabel"
       />
-      <QuestionersData enableMatrix />
+      <LoadingComponent>
+        <QuestionersData enableMatrix />
+      </LoadingComponent>
       <Step
         title="Langkah 2"
         description="Dari persamaan normal disusun menjadi dalam bentuk matrix, dan didapatkan angka tiap matrix"
+      />
+      <LoadingComponent>
+        <MatrixCalculations />
+      </LoadingComponent>
+      <Step
+        title="Langkah 3"
+        description="Mencari determinan tiap matrix dan mendapatkan nilainya"
       />
     </RouteContainer>
   );

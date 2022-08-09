@@ -1,7 +1,8 @@
-import { Table, Text } from "@mantine/core";
+import { Box, Table, Text } from "@mantine/core";
 import { Th } from "components";
+import { generateTotalMatrix } from "pages/functions";
 import { FC, ReactElement, useMemo } from "react";
-import { VariableAttributes } from "types/global";
+import { TFirstStep, VariableAttributes } from "types/global";
 
 interface props {
   data: VariableAttributes[];
@@ -38,6 +39,33 @@ const QuestionersMatrix: FC<props> = ({ data }): ReactElement => {
     []
   );
 
+  const tableFooter = useMemo(
+    () => (
+      <Box
+        component="tr"
+        sx={({ colors }) => ({
+          background: colors.grape[8],
+          "& div": {
+            color: "white",
+          },
+        })}
+      >
+        {Object.keys(matrixColumns).map((key, idx) => (
+          <Th
+            sx={(theme) => ({ background: theme.colors.grape[5] })}
+            key={`${idx}${key}`}
+          >
+            {generateTotalMatrix(
+              data.map((d) => d.first_step),
+              key as keyof TFirstStep
+            ).toFixed(3)}
+          </Th>
+        ))}
+      </Box>
+    ),
+    [data]
+  );
+
   const tableData = useMemo(
     () =>
       data.map((variable) => (
@@ -60,7 +88,7 @@ const QuestionersMatrix: FC<props> = ({ data }): ReactElement => {
     <Table verticalSpacing="md" striped my="md">
       <thead>{tableColumnHeader}</thead>
       <tbody>{tableData}</tbody>
-      <tfoot>{tableColumnHeader}</tfoot>
+      <tfoot>{tableFooter}</tfoot>
     </Table>
   );
 };

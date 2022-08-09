@@ -5,6 +5,7 @@ import { useConnectServer } from "hooks/useConnectServer";
 import { useViewportSize } from "@mantine/hooks";
 import { Button, Center, Loader, Title, useMantineTheme } from "@mantine/core";
 import { Refresh } from "tabler-icons-react";
+import API from "connection/API";
 
 const {
   REACT_APP_IP_ADDRESS = "http://localhost",
@@ -17,6 +18,11 @@ const adapter = new Adapter(
   localStorage
 );
 
+export const AxiosAdapter = new API(
+  REACT_APP_IP_ADDRESS,
+  parseInt(REACT_APP_PORT)
+);
+
 const App: FC = (): ReactElement => {
   const { ready, error, tryAgain } = useConnectServer(adapter);
   const { width, height } = useViewportSize();
@@ -24,15 +30,16 @@ const App: FC = (): ReactElement => {
 
   return ready ? (
     <Dashboard />
-  ) : (
-    error ?
-    <Center sx={{ width, height, flexDirection: 'column' }}>
+  ) : error ? (
+    <Center sx={{ width, height, flexDirection: "column" }}>
       <Title ml={spacing.md} order={3}>
         Tidak dapat menghubungi server
       </Title>
-      <Button my="md" onClick={tryAgain} leftIcon={<Refresh />} >Coba Lagi</Button>
+      <Button my="md" onClick={tryAgain} leftIcon={<Refresh />}>
+        Coba Lagi
+      </Button>
     </Center>
-    :
+  ) : (
     <Center sx={{ width, height }}>
       <Loader size="xl" color={primaryColor} />
       <Title ml={spacing.md} order={3}>

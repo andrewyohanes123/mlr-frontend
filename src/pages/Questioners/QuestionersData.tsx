@@ -98,50 +98,47 @@ const QuestionersData: FC<props> = ({ enableMatrix = false }): ReactElement => {
         >
           <Text sx={{ textAlign: "center" }} weight="bold">
             {variables.rows.length > 0
-              ? variables.rows
-                  .map((v) => v.x1)
-                  .reduce((a, b) => a + b)
-                  .toFixed(2)
+              ? Math.fround(
+                  variables.rows.map((v) => v.x1).reduce((a, b) => a + b)
+                ).toFixed(2)
               : 0}
           </Text>
         </Th>
         <th>
           <Text sx={{ textAlign: "center" }} color="white" weight="bold">
             {variables.rows.length > 0
-              ? variables.rows
-                  .map((v) => v.x2)
-                  .reduce((a, b) => a + b)
-                  .toFixed(2)
+              ? Math.fround(
+                  variables.rows.map((v) => v.x2).reduce((a, b) => a + b)
+                ).toFixed(2)
               : 0}
           </Text>
         </th>
         <th>
           <Text sx={{ textAlign: "center" }} weight="bold">
             {variables.rows.length > 0
-              ? variables.rows
-                  .map((v) => v.x3)
-                  .reduce((a, b) => a + b)
-                  .toFixed(2)
+              ? Math.fround(
+                  variables.rows.map((v) => v.x3).reduce((a, b) => a + b)
+                ).toFixed(2)
               : 0}
           </Text>
         </th>
         <th>
           <Text sx={{ textAlign: "center" }} weight="bold">
             {variables.rows.length > 0
-              ? variables.rows
-                  .map((v) => v.x4)
-                  .reduce((a, b) => a + b)
-                  .toFixed(2)
+              ? Math.fround(
+                  variables.rows.map((v) => v.x4).reduce((a, b) => a + b)
+                ).toFixed(2)
               : 0}
           </Text>
         </th>
         <th colSpan={2}>
           <Text weight="bold">
             {variables.rows.length > 0
-              ? variables.rows
-                  .map((v) => Math.fround((v.x1 + v.x2 + v.x3 + v.x4) / 4))
-                  .reduce((a, b) => a + b)
-                  .toFixed(2)
+              ? Math.fround(
+                  variables.rows
+                    .map((v) => Math.fround((v.x1 + v.x2 + v.x3 + v.x4) / 4))
+                    .reduce((a, b) => a + b)
+                ).toFixed(2)
               : 0}
           </Text>
         </th>
@@ -180,7 +177,7 @@ const QuestionersData: FC<props> = ({ enableMatrix = false }): ReactElement => {
               <Text align="center">{x4}</Text>
             </td>
             <td>
-              <Text align="center">{scoreAvg.toFixed(2)}</Text>
+              <Text align="center">{Math.fround(scoreAvg).toFixed(2)}</Text>
             </td>
             <td>
               <Text variant="gradient" align="center" weight="bold">
