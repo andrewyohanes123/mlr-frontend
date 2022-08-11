@@ -5,7 +5,7 @@ import { useErrorCatcher } from "hooks/useErrorCatcher";
 import { Box, Grid, Paper } from "@mantine/core";
 import MatrixTable, { MatrixHTable } from "./MatrixTable";
 
-const initialState: CalculatedMatrix = {
+export const initialMatrixState: CalculatedMatrix = {
   matrixA: [],
   matrixA1: [],
   matrixA2: [],
@@ -13,10 +13,16 @@ const initialState: CalculatedMatrix = {
   matrixA4: [],
   matrixA5: [],
   matrixH: [],
+  detA: 0,
+  detA1: 0,
+  detA2: 0,
+  detA3: 0,
+  detA4: 0,
+  detA5: 0,
 };
 
 const MatrixCalculations: FC = (): ReactElement => {
-  const [matrix, setMatrix] = useState<CalculatedMatrix>(initialState);
+  const [matrix, setMatrix] = useState<CalculatedMatrix>(initialMatrixState);
   const { errorCatcher } = useErrorCatcher();
 
   useEffect(() => {

@@ -68,4 +68,10 @@ export interface CalculatedMatrix {
   matrixA3: TMatrixAn;
   matrixA4: TMatrixAn;
   matrixA5: TMatrixAn;
+  detA: number;
+  detA1: number;
+  detA2: number;
+  detA3: number;
+  detA4: number;
+  detA5: number;
 }

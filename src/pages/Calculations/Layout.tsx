@@ -6,6 +6,7 @@ import { SquareRoot2 } from "tabler-icons-react";
 
 const QuestionersData = lazy(() => import("pages/Questioners/QuestionersData"));
 const MatrixCalculations = lazy(() => import("./MatrixCalculations"));
+const MatrixDeterminants = lazy(() => import("./MatrixDeterminants"));
 
 interface IStepProps {
   title?: string;
@@ -43,6 +44,9 @@ const Layout: FC = (): ReactElement => {
         title="Langkah 3"
         description="Mencari determinan tiap matrix dan mendapatkan nilainya"
       />
+      <LoadingComponent>
+        <MatrixDeterminants />
+      </LoadingComponent>
     </RouteContainer>
   );
 };
