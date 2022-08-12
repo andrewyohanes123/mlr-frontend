@@ -74,4 +74,9 @@ export interface CalculatedMatrix {
   detA3: number;
   detA4: number;
   detA5: number;
+  b1: number;
+  b2: number;
+  b3: number;
+  b4: number;
+  b5: number;
 }

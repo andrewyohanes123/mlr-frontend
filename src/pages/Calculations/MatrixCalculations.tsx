@@ -1,7 +1,5 @@
-import { FC, ReactElement, useEffect, useState } from "react";
-import { AxiosAdapter } from "App";
+import { FC, ReactElement } from "react";
 import { CalculatedMatrix } from "types/global";
-import { useErrorCatcher } from "hooks/useErrorCatcher";
 import { Box, Grid, Paper } from "@mantine/core";
 import MatrixTable, { MatrixHTable } from "./MatrixTable";
 
@@ -19,22 +17,18 @@ export const initialMatrixState: CalculatedMatrix = {
   detA3: 0,
   detA4: 0,
   detA5: 0,
+  b1: 0,
+  b2: 0,
+  b3: 0,
+  b4: 0,
+  b5: 0
 };
 
-const MatrixCalculations: FC = (): ReactElement => {
-  const [matrix, setMatrix] = useState<CalculatedMatrix>(initialMatrixState);
-  const { errorCatcher } = useErrorCatcher();
+interface props {
+  matrix: CalculatedMatrix;
+}
 
-  useEffect(() => {
-    AxiosAdapter.rawGet<CalculatedMatrix>(
-      "variables/calculated-variables",
-      "api"
-    )
-      .then((resp) => {
-        setMatrix(resp.data);
-      })
-      .catch(errorCatcher);
-  }, [errorCatcher]);
+const MatrixCalculations: FC<props> = ({matrix}): ReactElement => {
 
   return (
     <Box>

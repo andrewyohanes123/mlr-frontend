@@ -1,26 +1,13 @@
-import { AxiosAdapter } from 'App';
-import { useErrorCatcher } from 'hooks/useErrorCatcher';
-import { FC, ReactElement, useEffect, useState } from 'react'
-import { CalculatedMatrix } from 'types/global';
-import { initialMatrixState } from './MatrixCalculations';
+import { FC, ReactElement } from 'react'
 import { Box, Grid, } from '@mantine/core';
 import DeterminantCard from './DeterminantCard';
+import { CalculatedMatrix } from 'types/global';
 
-const MatrixDeterminants: FC = () : ReactElement=> {
-  const [matrix, setMatrix] = useState<CalculatedMatrix>(initialMatrixState);
-  const {errorCatcher} = useErrorCatcher();
+interface props {
+  matrix: CalculatedMatrix;
+}
 
-  useEffect(() => {
-    AxiosAdapter.rawGet<CalculatedMatrix>(
-      "variables/calculated-variables",
-      "api"
-    )
-      .then((resp) => {
-        setMatrix(resp.data);
-      })
-      .catch(errorCatcher);
-  }, [errorCatcher]);
-
+const MatrixDeterminants: FC<props> = ({matrix}) : ReactElement=> {
   return (
     <Box>
       <Grid gutter="lg">

@@ -33,6 +33,8 @@ const Layout: FC = (): ReactElement => {
   const [data, setData] = useState<TCSVData[]>([]);
   const [loading, toggleLoading] = useState<boolean>(false);
 
+  document.title = "Beranda"
+
   const onDrop = useCallback((files: File[]) => {
     setFiles(files);
     const [file] = files;
