@@ -1,4 +1,4 @@
-import { Loader, LoadingOverlay, Pagination, Table } from "@mantine/core";
+import { Loader, LoadingOverlay, Pagination, Table, Text } from "@mantine/core";
 import { AxiosAdapter } from "App";
 import RouteContainer from "components/RouteContainer";
 import { useErrorCatcher } from "hooks/useErrorCatcher";
@@ -82,37 +82,47 @@ const Layout: FC = (): ReactElement => {
 
   const tableData = useMemo(
     () =>
-      variables.rows.map((row, idx) => {
-        const b2x1 = Math.fround(row.x1 * matrix.b2);
-        const b3x2 = Math.fround(row.x2 * matrix.b3);
-        const b4x3 = Math.fround(row.x3 * matrix.b4);
-        const b5x4 = Math.fround(row.x4 * matrix.b5);
+      variables.rows.length > 0 ? (
+        variables.rows.map((row, idx) => {
+          const b2x1 = Math.fround(row.x1 * matrix.b2);
+          const b3x2 = Math.fround(row.x2 * matrix.b3);
+          const b4x3 = Math.fround(row.x3 * matrix.b4);
+          const b5x4 = Math.fround(row.x4 * matrix.b5);
 
-        const bxTotal = Math.fround(b2x1 + b3x2 + b4x3 + b5x4);
+          const bxTotal = Math.fround(b2x1 + b3x2 + b4x3 + b5x4);
 
-        return (
-          <tr key={`${row.age}${row.created_at}${row.id}`}>
-            <td>{idx + 1}</td>
-            <td>{matrix.b1}</td>
-            <td>{b2x1.toFixed(3)}</td>
-            <td>{b3x2.toFixed(3)}</td>
-            <td>{b4x3.toFixed(3)}</td>
-            <td>{b5x4.toFixed(3)}</td>
-            <td>{bxTotal.toFixed(3)}</td>
-            <td>
-              {bxTotal >= 4.2
-                ? 5
-                : bxTotal >= 3.4
-                ? 4
-                : bxTotal >= 2.6
-                ? 3
-                : bxTotal >= 1.8
-                ? 2
-                : 1}
-            </td>
-          </tr>
-        );
-      }),
+          return (
+            <tr key={`${row.age}${row.created_at}${row.id}`}>
+              <td>{idx + 1}</td>
+              <td>{matrix.b1}</td>
+              <td>{b2x1.toFixed(3)}</td>
+              <td>{b3x2.toFixed(3)}</td>
+              <td>{b4x3.toFixed(3)}</td>
+              <td>{b5x4.toFixed(3)}</td>
+              <td>{bxTotal.toFixed(3)}</td>
+              <td>
+                {bxTotal >= 4.2
+                  ? 5
+                  : bxTotal >= 3.4
+                  ? 4
+                  : bxTotal >= 2.6
+                  ? 3
+                  : bxTotal >= 1.8
+                  ? 2
+                  : 1}
+              </td>
+            </tr>
+          );
+        })
+      ) : (
+        <tr>
+          <td colSpan={8}>
+            <Text align="center" weight="bold">
+              Tidak ada data
+            </Text>
+          </td>
+        </tr>
+      ),
     [matrix.b1, matrix.b2, matrix.b3, matrix.b4, matrix.b5, variables.rows]
   );
 
@@ -122,30 +132,28 @@ const Layout: FC = (): ReactElement => {
   );
 
   return (
-    <RouteContainer
-      icon={<ChartInfographic />}
-      title="Hasil Perhitungan"
-    >
-      <LoadingOverlay visible={loading} overlayBlur={2} loader={<Loader variant="dots" size="xl" />} />
+    <RouteContainer icon={<ChartInfographic />} title="Hasil Perhitungan">
+      <LoadingOverlay
+        visible={loading}
+        overlayBlur={2}
+        loader={<Loader variant="dots" size="xl" />}
+      />
       <Pagination
         align="center"
         total={totalPages}
         page={page}
         onChange={setPage}
       />
-      <Table striped>
-        <thead>
-          {tableHeaders}
-        </thead>
-        <tbody>
-          {tableData}
-        </tbody>
+      <Table my="md" striped>
+        <thead>{tableHeaders}</thead>
+        <tbody>{tableData}</tbody>
       </Table>
       <Pagination
         align="center"
         total={totalPages}
         page={page}
         onChange={setPage}
+        
       />
     </RouteContainer>
   );
