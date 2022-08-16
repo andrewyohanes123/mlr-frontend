@@ -1,4 +1,4 @@
-import { FC, ReactElement, useCallback } from "react";
+import { FC, ReactElement, useCallback, useMemo } from "react";
 import { ThemeIcon, UnstyledButton, Group, Text } from "@mantine/core";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -24,6 +24,8 @@ const NavbarLink: FC<MainLinkProps> = ({
     });
   }, [navigate, route]);
 
+  const isSelected = useMemo(() => pathname === route, [pathname, route]);
+
   return (
     <UnstyledButton
       onClick={navigateToRoute}
@@ -31,36 +33,41 @@ const NavbarLink: FC<MainLinkProps> = ({
         display: "block",
         width: "100%",
         padding: theme.spacing.xs,
-        borderRadius: theme.radius.sm,
+        paddingLeft: theme.spacing.lg,
+        borderTopLeftRadius: theme.radius.lg,
+        borderBottomLeftRadius: theme.radius.lg,
         background:
           pathname === route
             ? theme.colorScheme !== "dark"
-              ? theme.colors.gray[1]
+              ? theme.colors.blue[1]
               : theme.colors.dark[6]
             : "transparent",
         color:
           theme.colorScheme === "dark"
             ? theme.colors.dark[0]
-            : theme.colors.gray[9],
+            : isSelected
+            ? theme.colors.dark[4]
+            : theme.colors.blue[9],
         "&:hover": {
           backgroundColor:
             theme.colorScheme === "dark"
               ? theme.colors.dark[6]
-              : theme.colors.gray[2],
+              : theme.colors.blue[2],
         },
       })}
     >
       <Group noWrap>
-        <ThemeIcon color={color} variant="light">
+        <ThemeIcon color={color}>
           {icon}
         </ThemeIcon>
 
         <Text
+        color=""
           style={{
             fontWeight: "bold",
             overflow: "hidden",
             whiteSpace: "nowrap",
-            textOverflow: "ellipsis"
+            textOverflow: "ellipsis",
           }}
           size="sm"
         >

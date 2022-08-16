@@ -141,11 +141,11 @@ class API {
     return res.data.data;
   }
 
-  async rawDelete(endpoint: string, parent: string = "apis") {
-    const res = await this._req.delete(
+  async rawDelete<T = {data: any}>(endpoint: string, parent: string = "apis") {
+    const res = await this._req.delete<T>(
       `${this._baseURL}/${parent}/${endpoint}`
     );
-    return res.data.data;
+    return res.data;
   }
 }
 

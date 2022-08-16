@@ -1,5 +1,12 @@
 import { FC, ReactElement, useCallback, useState } from "react";
-import { Button, Grid, Group, Text, useMantineTheme } from "@mantine/core";
+import {
+  Button,
+  Divider,
+  Grid,
+  Group,
+  Text,
+  useMantineTheme,
+} from "@mantine/core";
 import { Dropzone } from "@mantine/dropzone";
 import { IconUpload, IconX, IconFileText } from "@tabler/icons";
 import Papa from "papaparse";
@@ -9,6 +16,8 @@ import { showNotification } from "@mantine/notifications";
 import { useErrorCatcher } from "hooks/useErrorCatcher";
 import useModels from "hooks/useModels";
 import RouteContainer from "components/RouteContainer";
+import QuestionerForm from "./QuestionerForm";
+import DeleteAllData from "./DeleteAllData";
 
 const MAX_FILE_SIZE = 3 * 1024 ** 2;
 const ICON_SIZE = 70;
@@ -33,7 +42,7 @@ const Layout: FC = (): ReactElement => {
   const [data, setData] = useState<TCSVData[]>([]);
   const [loading, toggleLoading] = useState<boolean>(false);
 
-  document.title = "Beranda"
+  document.title = "Beranda";
 
   const onDrop = useCallback((files: File[]) => {
     setFiles(files);
@@ -112,7 +121,7 @@ const Layout: FC = (): ReactElement => {
       title="Masukkan File CSV"
       icon={<FileText strokeWidth={1} />}
     >
-      <Grid sx={{ height: "100%" }} align="center" gutter="md">
+      <Grid sx={{ height: "100%" }} gutter="md">
         <Grid.Col span={6}>
           <Dropzone
             loading={loading}
@@ -160,6 +169,8 @@ const Layout: FC = (): ReactElement => {
               </div>
             </Group>
           </Dropzone>
+          <Divider label="Atau" labelPosition="center" my="lg" />
+          <QuestionerForm />
         </Grid.Col>
         <Grid.Col span={6}>
           <FileInfo files={files} />
@@ -168,6 +179,7 @@ const Layout: FC = (): ReactElement => {
               Masukkan Data
             </Button>
           )}
+          <DeleteAllData />          
         </Grid.Col>
       </Grid>
     </RouteContainer>

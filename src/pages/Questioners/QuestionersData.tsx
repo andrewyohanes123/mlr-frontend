@@ -148,53 +148,63 @@ const QuestionersData: FC<props> = ({ enableMatrix = false }): ReactElement => {
 
   const tableData = useMemo(
     () =>
-      variables.rows.map(({ x1, x2, x3, x4, ...variable }, idx) => {
-        const scoreAvg = Math.fround((x1 + x2 + x3 + x4) / 4);
-        return (
-          <tr key={`${idx}${variable.id}v${scoreAvg + variable.id}`}>
-            <td>
-              <Text align="center">{idx + 1}</Text>
-            </td>
-            <td>
-              <Text align="center">{variable.age} tahun</Text>
-            </td>
-            <td>
-              <Text align="center">{variable.gender}</Text>
-            </td>
-            <td>
-              <Text align="center">{variable.occupation}</Text>
-            </td>
-            <td>
-              <Text align="center">{x1}</Text>
-            </td>
-            <td>
-              <Text align="center">{x2}</Text>
-            </td>
-            <td>
-              <Text align="center">{x3}</Text>
-            </td>
-            <td>
-              <Text align="center">{x4}</Text>
-            </td>
-            <td>
-              <Text align="center">{Math.fround(scoreAvg).toFixed(2)}</Text>
-            </td>
-            <td>
-              <Text variant="gradient" align="center" weight="bold">
-                {scoreAvg >= 4.2
-                  ? 5
-                  : scoreAvg >= 3.4
-                  ? 4
-                  : scoreAvg >= 2.6
-                  ? 3
-                  : scoreAvg >= 1.8
-                  ? 2
-                  : 1}
-              </Text>
-            </td>
-          </tr>
-        );
-      }),
+      variables.rows.length > 0 ? (
+        variables.rows.map(({ x1, x2, x3, x4, ...variable }, idx) => {
+          const scoreAvg = Math.fround((x1 + x2 + x3 + x4) / 4);
+          return (
+            <tr key={`${idx}${variable.id}v${scoreAvg + variable.id}`}>
+              <td>
+                <Text align="center">{idx + 1}</Text>
+              </td>
+              <td>
+                <Text align="center">{variable.age} tahun</Text>
+              </td>
+              <td>
+                <Text align="center">{variable.gender}</Text>
+              </td>
+              <td>
+                <Text align="center">{variable.occupation}</Text>
+              </td>
+              <td>
+                <Text align="center">{x1}</Text>
+              </td>
+              <td>
+                <Text align="center">{x2}</Text>
+              </td>
+              <td>
+                <Text align="center">{x3}</Text>
+              </td>
+              <td>
+                <Text align="center">{x4}</Text>
+              </td>
+              <td>
+                <Text align="center">{Math.fround(scoreAvg).toFixed(2)}</Text>
+              </td>
+              <td>
+                <Text variant="gradient" align="center" weight="bold">
+                  {scoreAvg >= 4.2
+                    ? 5
+                    : scoreAvg >= 3.4
+                    ? 4
+                    : scoreAvg >= 2.6
+                    ? 3
+                    : scoreAvg >= 1.8
+                    ? 2
+                    : 1}
+                </Text>
+              </td>
+            </tr>
+          );
+        })
+      ) : (
+        <tr>
+          <td colSpan={10}>
+            <Text align="center" weight="bold">
+              Tidak ada data kuesioner
+            </Text>
+          </td>
+        </tr>
+      ),
     [variables.rows]
   );
 

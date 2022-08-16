@@ -27,7 +27,7 @@ const FileInfo: FC<props> = ({ files }): ReactElement => {
       )),
     [files]
   );
-  return <Box p="md">{files.length > 0 ? renderFileCard : <EmptyFiles />}</Box>;
+  return <Box sx={{ minHeight: 300 }} p="md">{files.length > 0 ? renderFileCard : <EmptyFiles />}</Box>;
 };
 
 export default FileInfo;
