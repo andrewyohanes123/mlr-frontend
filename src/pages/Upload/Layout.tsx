@@ -169,8 +169,12 @@ const Layout: FC = (): ReactElement => {
               </div>
             </Group>
           </Dropzone>
-          <Divider label="Atau" labelPosition="center" my="lg" />
-          <QuestionerForm />
+          {false && (
+            <>
+              <Divider label="Atau" labelPosition="center" my="lg" />
+              <QuestionerForm />
+            </>
+          )}
         </Grid.Col>
         <Grid.Col span={6}>
           <FileInfo files={files} />
@@ -179,7 +183,7 @@ const Layout: FC = (): ReactElement => {
               Masukkan Data
             </Button>
           )}
-          <DeleteAllData />          
+          <DeleteAllData />
         </Grid.Col>
       </Grid>
     </RouteContainer>
