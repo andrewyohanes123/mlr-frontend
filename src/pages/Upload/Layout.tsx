@@ -52,11 +52,11 @@ const Layout: FC = (): ReactElement => {
       header: true,
       skipEmptyLines: true,
       complete(results, file) {
-        // console.log(results);
+        console.log(results);
         setData(results.data as TCSVData[]);
       },
       transformHeader(header, index) {
-        switch (header) {
+        switch (header.trim()) {
           case "Usia":
             return "age";
           case "Jenis Kelamin":
