@@ -89,6 +89,7 @@ const Layout: FC = (): ReactElement => {
         }
         return value;
       },
+      delimitersToGuess: [',', '\t', '|', ';', Papa.RECORD_SEP, Papa.UNIT_SEP],
     });
   }, []);
 
